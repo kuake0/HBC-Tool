@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HBC-Tool</string>
+    <string name="select_bundle_file">选择文件</string>
+    <string name="disassemble">反汇编</string>
+    <string name="assemble">汇编</string>
+    <string name="processing">处理中...</string>
+    <string name="no_file_selected">未选择文件</string>
+    <string name="output_log">输出日志</string>
+    <string name="file_info">文件信息</string>
+    <string name="select_file_hint">请选择 .bundle 或 导出的反汇编zip 文件开始处理</string>
+    <string name="permission_required">需要存储权限才能访问文件</string>
+    <string name="permission_denied">权限被拒绝</string>
+    <string name="operation_success">操作成功！</string>
+    <string name="operation_failed">操作失败</string>
+    <string name="clear_log">清空日志</string>
+    <string name="export_output">导出结果</string>
+    <string name="about">关于</string>
+    <string name="about_info">HBC-Tool Android 版本\n\n基于 Kirlif/HBC-Tool\nHermes 字节码反汇编/汇编工具</string>
+</resources>
