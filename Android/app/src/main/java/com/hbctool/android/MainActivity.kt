@@ -177,11 +177,13 @@ class MainActivity : AppCompatActivity() {
         if (hasmFiles.size == 1) {
             val hasmFile = hasmFiles.first()
             // 汇编需要目录路径（包含 metadata.json, string.json, instruction.hasm）
-            selectedFilePath = hasmFile.parentFile.absolutePath
-            binding.filePathText.text = "已选择目录: ${hasmFile.parentFile.name}\n（汇编需要完整目录）"
-            binding.assembleButton.isEnabled = true
-            binding.disassembleButton.isEnabled = false
-            binding.cleanEnvironmentButton.isEnabled = true
+            hasmFile.parentFile?.let { parent ->
+                selectedFilePath = parent.absolutePath
+                binding.filePathText.text = "已选择目录: ${parent.name}\n（汇编需要完整目录）"
+                binding.assembleButton.isEnabled = true
+                binding.disassembleButton.isEnabled = false
+                binding.cleanEnvironmentButton.isEnabled = true
+            }
         }
     }
     
@@ -491,7 +493,6 @@ class MainActivity : AppCompatActivity() {
                     
                     val log = result.callAttr("get", "log")?.toString() ?: ""
                     val error = result.callAttr("get", "error")?.toString()
-                    val outputDirPath = result.callAttr("get", "output_dir")?.toString()
                 
                     if (status == "success") {
                         appendLog("✓ 反汇编完成！")
@@ -567,7 +568,6 @@ class MainActivity : AppCompatActivity() {
                 val status = result.callAttr("get", "status")?.toString() ?: "unknown"
                 val log = result.callAttr("get", "log")?.toString() ?: ""
                 val error = result.callAttr("get", "error")?.toString()
-                val outputFilePath = result.callAttr("get", "output_file")?.toString()
                 
                 if (status == "success") {
                     appendLog("✓ 汇编完成！")
@@ -873,13 +873,15 @@ class MainActivity : AppCompatActivity() {
                     hasmFiles.size == 1 && bundleFiles.isEmpty() -> {
                         // 只有一个 .hasm 文件，自动加载用于汇编（需要目录路径）
                         val hasmFile = hasmFiles.first()
-                        selectedFilePath = hasmFile.parentFile.absolutePath
-                        binding.filePathText.text = "已选择目录: ${hasmFile.parentFile.name}\n（汇编需要完整目录）"
-                        binding.assembleButton.isEnabled = true
-                        binding.disassembleButton.isEnabled = false
-                        binding.cleanEnvironmentButton.isEnabled = true
-                        appendLog("✓ 已自动加载 HASM 目录: ${hasmFile.parentFile.name}")
-                        Toast.makeText(this, "导入成功，已加载 ${hasmFile.parentFile.name}", Toast.LENGTH_SHORT).show()
+                        hasmFile.parentFile?.let { parent ->
+                            selectedFilePath = parent.absolutePath
+                            binding.filePathText.text = "已选择目录: ${parent.name}\n（汇编需要完整目录）"
+                            binding.assembleButton.isEnabled = true
+                            binding.disassembleButton.isEnabled = false
+                            binding.cleanEnvironmentButton.isEnabled = true
+                            appendLog("✓ 已自动加载 HASM 目录: ${parent.name}")
+                            Toast.makeText(this, "导入成功，已加载 ${parent.name}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                     bundleFiles.size == 1 && hasmFiles.isEmpty() -> {
                         // 只有一个 .bundle 文件，自动加载用于反汇编
