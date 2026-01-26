@@ -923,7 +923,7 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("确定", null)
             .setNeutralButton("GitHub") { _, _ ->
                 val intent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("https://github.com/Kirlif/HBC-Tool")
+                    data = Uri.parse("https://github.com/muort521/HBC-Tool")
                 }
                 startActivity(intent)
             }
