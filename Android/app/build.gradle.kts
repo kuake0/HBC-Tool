@@ -14,7 +14,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         
         // 配置支持的 CPU 架构
@@ -53,8 +52,8 @@ chaquopy {
         
         // 指定构建时使用的 Python（避免使用 Python 3.13+ 因为缺少 cgi 模块）
 // buildPython("C:/Users/42201/AppData/Local/Programs/Python/Python311/python.exe")
-       / 
-     / / pip {
+       
+       pip {
             install("construct==2.10.68")
           install("colorama==0.4.6")
            install("docopt==0.6.2")
